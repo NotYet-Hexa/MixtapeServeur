@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MixtapeServeur'
+    'MixtapeServeur',
+    'MixtapeServeur.apps.user',
 ]
 
 MIDDLEWARE = [
