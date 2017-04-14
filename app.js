@@ -15,18 +15,14 @@ var io = require('socket.io').listen(server);
 // Quand un client se connecte, on le note dans la console
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('message', 'Vous êtes bien connecté !');
-	console.log('Client Co');
-	var socketId = socket.id;
-  	var clientIp = socket.request.connection.remoteAddress;
-  	console.log('ID Socket : ' + socketId);
-  	console.log('Client Ip : ' + clientIp);
+	console.log('Connexion Raspberry Ouverte');
 
-	socket.on('message', function (message) {
-		console.log('Un client me parle ! Il me dit : ' + message);
+	socket.on('informations', function (message) {
+		console.log('Infomrations : ' + message);
 	});	
 
 	socket.on('raspberry_registration', function (registrationMessage) {
+		console.log('Receive Response');
 		jsonObject = JSON.parse(registrationMessage);
 		console.log(jsonObject.raspberry);
 		console.log('Send Response');
