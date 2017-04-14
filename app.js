@@ -17,9 +17,22 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 	socket.emit('message', 'Vous êtes bien connecté !');
 	console.log('Client Co');
+	var socketId = socket.id;
+  	var clientIp = socket.request.connection.remoteAddress;
+  	console.log('ID Socket : ' + socketId);
+  	console.log('Client Ip : ' + clientIp);
+
 	socket.on('message', function (message) {
 		console.log('Un client me parle ! Il me dit : ' + message);
 	});	
+
+	socket.on('raspberry_registration', function (registrationMessage) {
+		jsonObject = JSON.parse(registrationMessage);
+		console.log(jsonObject.raspberry);
+		console.log('Send Response');
+		socket.emit('raspberry_registration', 'Registration Successfull');
+	});	
+
 });
 
 
