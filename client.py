@@ -13,6 +13,14 @@ data = {
 
 json_data_registration = json.dumps(data)
 
-socketIO = SocketIO('localhost', 8080)
-socketIO.on('raspberry_registration',json_data_registration)
-socketIO.wait()
+def on_res(*args):
+    print('on_reponse', args)
+
+
+#socketIO = SocketIO('localhost', 8080)
+#socketIO.on('raspberry_registration',json_data_registration)
+#socketIO.wait()
+
+with SocketIO('localhost', 8000, LoggingNamespace) as socketIO:
+    socketIO.emit('raspberry_registration', {'ack': 'ok'}, on_res)
+    socketIO.wait_for_callbacks(seconds=1)
