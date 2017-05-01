@@ -20,8 +20,11 @@ from django.shortcuts import render_to_response
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^user/', include('MixtapeServeur.apps.user.urls')),
+    url(r'^station/', include('MixtapeServeur.apps.station.urls')),
+    url(r'^MixTapeUser/', include('MixtapeServeur.apps.mixtapeUser.urls')),
     url(r'^', lambda request: render_to_response("hello.html")),
-    url(r'^user/', include('MixtapeServeur.apps.user.urls'))
+
 ]
 
 # debug toolbar for dev

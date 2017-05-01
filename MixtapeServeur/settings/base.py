@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MixtapeServeur',
     'MixtapeServeur.apps.user',
+    'MixtapeServeur.apps.station',
+    'MixtapeServeur.apps.genre',
+    'MixtapeServeur.apps.artiste',
+    'MixtapeServeur.apps.mixtapeUser',
+    'MixtapeServeur.apps.taste',
 ]
 
 MIDDLEWARE = [
