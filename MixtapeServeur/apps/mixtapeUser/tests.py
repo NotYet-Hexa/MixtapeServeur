@@ -1,8 +1,10 @@
 from django.test import TestCase
-from .models import general_taste
+from .functions import general_taste
 
 
 class general_taste_test(TestCase):
+    fixtures = ['test.json',]
+    
     def test_general_taste_1(self):
         """
         Vérifie si la méthode est_recent d'un Article ne
@@ -10,10 +12,11 @@ class general_taste_test(TestCase):
         dans le futur.
         """
         mixtape_user_general_taste = general_taste(mixtape_user_id=9)
-        correct=1
+        correct = 1
+        print(mixtape_user_general_taste)
         if mixtape_user_general_taste["g1"] != 50:
-            correct*=0
+            correct *= 0
         if mixtape_user_general_taste["g2"] != 50:
-            correct*=0
+            correct *= 0
 
         self.assertEqual(correct, 1)

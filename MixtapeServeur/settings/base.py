@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'MixtapeServeur.apps.artiste',
     'MixtapeServeur.apps.mixtapeUser',
     'MixtapeServeur.apps.taste',
+    'MixtapeServeur.apps.music',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from MixtapeServeur.apps.station.models import Station
-from .models import MixtapeUser, set_station, creat_mixtape_user
+from .models import MixtapeUser, set_station, creat_mixtape_user 
+from .functions import test_dic_gen_taste, station_taste
+
 def test_creat_MTuser(request):
     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
     # code pour tester créer perso
@@ -22,5 +24,12 @@ def test_set_station(request):
     set_station(mixtape_user.id, station.id)
     text = """<h1>Test set station have been executed, check out if the user had been
      corectly created</h1>"""
+    return HttpResponse(text)
+
+def test_test_gen_taste(request):
+    """ Exemple de page HTML, non valide pour que l'exemple soit concis """
+    # code pour tester créer 
+    station_taste(station_id=6)
+    text = """ <h1> Test </h1>"""
     return HttpResponse(text)
 
