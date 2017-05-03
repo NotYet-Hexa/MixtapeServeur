@@ -44,8 +44,7 @@ def add_taste_genre(mixtape_user_id, genre_name): # A tester mais pas trop de ri
     """
     mixtape_user = MixtapeUser.objects.get(pk=mixtape_user_id)
     new_genre = Genre.objects.get(nom=genre_name)
-    null_artiste = Artiste.objects.get(nom="NULL")
-    taste = Taste(points=200, genre=new_genre, artiste=null_artiste,
+    taste = Taste(points=200, genre=new_genre,
                   mixtapeUser=mixtape_user)
     taste.save()
 

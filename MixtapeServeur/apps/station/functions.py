@@ -67,13 +67,16 @@ def next_song(station_id):
         if music.count() == 1:
             no_proposed_music *=0
             music = music.first()
-            if music.artiste.genre.nom in genre_dic.keys():
-                i = 0
-                while i <=  genre_dic[music.artiste.genre.nom]:
-                    i +=1
-                    proposed_song.insert(1,music.nom)
-            else:
-                proposed_song.insert(1,music.nom)
+            r = requests.get('https://api.spotify.com/v1/search?q='+music.artiste+'&type=artist')
+            for elem in r.json()['artists']['items']:
+                for genre_name in elem['genres']:
+                    if genre_name in genre_dic.keys():
+                        i = 0
+                        while i <=  genre_dic[music.artiste.genre.nom]:
+                            i +=1
+                            proposed_song.insert(1,music.nom)
+                    else:
+                        proposed_song.insert(1,music.nom)
     if no_proposed_music != 1:
         print(proposed_song)
         print("proposed_song")
