@@ -10,8 +10,12 @@ import random
 
 
 class MixtapeUser(AbstractUser):
-    fname = models.CharField(max_length=100, null=True, blank=True)
-    lname = models.CharField(max_length=100, null=True, blank=True)
+    is_facebook_user = models.BooleanField(max_length=100, default=False)
+    fb_id = models.CharField(max_length=100, null=True, blank=True)
+    profil_picture_url = models.CharField(max_length=100, null=True, blank=True)
+    device = models.CharField(max_length=100, null=True, blank=True)
+    gender = models.CharField(max_length=100, null=True, blank=True)
+    token = models.CharField(max_length=100, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     station = models.ForeignKey(Station, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
@@ -25,37 +29,7 @@ class MixtapeUser(AbstractUser):
         """
         return self.get_full_name()
 
-def creat_mixtape_user(pfname, plname, page, pliked_artiste_list, pliked_genre_list,
-                       punliked_genre_list, lat, longi):
-    """
-    pfname : string which contain the first name of the user
-    plname : string which contain the laste name of the user
-    page : int which contain the age of the user
-    pliked_artiste_list : list of string which containe the name of the liked artiste
-    pliked_genre_list : list of string which containe the name of the liked genre
-    punliked_genre_list : list of string which containe the name of the unliked genre
-    lat : int which contain the latitude of the user
-    longi : int which contain the longitude of the user
-    """
-    mixtape_user = MixtapeUser(fname=pfname, lname=plname, age=page,
-                               station=Station.objects.get(nom="NULL"), latitude=lat,
-                               longitude=longi)
-    mixtape_user.save()
-    for liked_artiste in pliked_artiste_list:
-        artiste = Artiste.objects.get(nom=liked_artiste)
-        taste = Taste(points=100, genre=Genre.objects.get(nom="NULL"), artiste=artiste,
-                      mixtapeUser=mixtape_user)
-        taste.save()
-    for liked_genre in pliked_genre_list:
-        genre = Genre.objects.get(nom=liked_genre)
-        taste = Taste(points=200, genre=genre, artiste=Artiste.objects.get(nom="NULL"),
-                      mixtapeUser=mixtape_user)
-        taste.save()
-    for unliked_genre in punliked_genre_list:
-        genre = Genre.objects.get(nom=unliked_genre)
-        taste = Taste(points=-200, genre=genre, artiste=Artiste.objects.get(nom="NULL"),
-                      mixtapeUser=mixtape_user)
-        taste.save()
+
 
 def set_station(mixtape_user_id, station_id):
     """

@@ -23,8 +23,8 @@ def view_next_song(request):
         identif = postjson["raspberryId"]
         
         try:
-            Station.objects.get(mac_address=identif)
-            n_sg = next_song(station_id=identif)
+            station = Station.objects.get(mac_address=identif)
+            n_sg = next_song(station_id=station.id)
             response["response"] = n_sg  
         except Exception:
             response["error"] = 404
@@ -53,7 +53,31 @@ def exist(request):
 
     return JsonResponse(response)
 
-def view_neighbor_stations(request, latitude, longitude):
+@csrf_exempt
+def view_neighbor_stations(request):
+    """ retourne toute les station à une 50 ène de metres """
+    # code pour tester créer 
+    response = {}
+    print("CC")
+    if request.method == "POST" and len(request.body) > 0:
+        print("CC")
+        postjson = json.loads(request.body.decode("utf-8"))
+        stations = neighbor_stations(lat=postjson["latitude"],
+                                     longi=postjson["longitude"])
+        if len(stations) > 0:
+            response["station_around"] = True 
+            response["list"] = []
+            for station in stations:
+                response["list"].insert(1, (station.nom , station.id))
+        else :
+            response["station_around"] = False
+    else :
+        return HttpResponseForbidden()
+
+    return JsonResponse(response)
+
+
+def aaa_view_neighbor_stations(request, latitude, longitude):
     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
     # code pour tester créer 
     stations = neighbor_stations(lat=latitude, longi=longitude)

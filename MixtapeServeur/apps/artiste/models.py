@@ -3,7 +3,7 @@ from MixtapeServeur.apps.genre.models import Genre
 
 class Artiste(models.Model):
     nom = models.CharField(max_length=100)
-    genre = models.ForeignKey(Genre)
+    genre = models.ForeignKey(Genre, null=True, blank=True)
     
     def __str__(self):
         """ 

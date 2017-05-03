@@ -1,0 +1,27 @@
+pour créer un user
+
+json={
+"user_name" : "zigmatoo2",
+ "first_name" : "FN3",
+“last_name" : "LN3",
+ "is_facebook_user" : "False",
+ "fb_id" : "000",
+"profil_picture_url" : "url",
+"device" : "phone",
+"gender" : "gender",
+"token" : "token",
+"age" : 21,
+"latitude" : 1.0,
+"longitude" : 1.0,
+"pliked_artiste_list" : [ "aa", "bb", "cc"],
+"pliked_genre_list" : ["g1", "g2", "g3", ],
+"pliked_genre_list" : ["g4", "g5"]
+ })
+
+
+pour avoir le voisinage
+
+json = {
+"latitude" = 45.781565,
+"longitude" = 4.872459
+}

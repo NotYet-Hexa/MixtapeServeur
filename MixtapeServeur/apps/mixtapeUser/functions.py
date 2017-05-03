@@ -12,16 +12,13 @@ def general_taste(mixtape_user_id):
     """
     mixtape_user = MixtapeUser.objects.get(pk=mixtape_user_id)
     general_taste_dic = {}
-    # print(Taste.objects.filter(mixtapeUser=mixtape_user))
     for taste in Taste.objects.filter(mixtapeUser=mixtape_user):
-        # print("CC")
         if taste.points == 200: # it was a liked genre
             if taste.genre.nom in general_taste_dic:
                 general_taste_dic[taste.genre.nom] += 200
             else:
-                # print("CC2")
                 general_taste_dic[taste.genre.nom] = 200
-                # print(general_taste_dic)
+
         if taste.points == 100: # it was a liked artiste
             if taste.artiste.genre.nom in general_taste_dic:
                 general_taste_dic[taste.genre.nom] += 100
@@ -37,17 +34,15 @@ def general_taste(mixtape_user_id):
     for value in general_taste_dic.values():
         total_point += abs(value)
     ratio = total_point / 100
-    # print ("general_taste_dic")
-    # print(general_taste_dic)
+
     for key in general_taste_dic.keys():
         general_taste_dic[key] /= ratio
-    # print ("general_taste_dic")
-    # print(general_taste_dic)
+
     return general_taste_dic
 
 def test_dic_gen_taste():
     mixtape_user_general_taste = general_taste(mixtape_user_id=9)
-    # print(mixtape_user_general_taste)
+
 
 def station_taste(station_id):
     """

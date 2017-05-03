@@ -5,7 +5,7 @@ class Station(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     
-    mac_address = models.CharField(max_length=17)
+    mac_address = models.CharField(max_length=17, null=True, blank=True)
     
     def __str__(self):
         """ 

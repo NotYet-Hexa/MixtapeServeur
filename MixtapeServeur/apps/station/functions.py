@@ -61,7 +61,7 @@ def neighbor_stations(lat, longi):
         distance = ((station.latitude - float(lat))**2+
                     (station.longitude - float(longi))**2)
         if distance < ((10**(-6))):
-            list_station_near.insert(1,station.nom)
+            list_station_near.insert(1,station)
     return list_station_near
     
 
