@@ -15,16 +15,18 @@ r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_user', json={
 "longitude" : 1.0,
 "pliked_artiste_list" : [ "aa", "bb", "cc"],
 "pliked_genre_list" : ["g1", "g2", "g3", ],
-"pliked_genre_list" : ["g4", "g5"]
+"punliked_genre_list" : ["g4", "g5"]
  })
 
 
 pour avoir le voisinage
 
 r = requests.post('http://localhost:8000/station/neighbor_stations', json = {
-"latitude" = 45.781565,
-"longitude" = 4.872459
+"latitude" : 45.781565,
+"longitude" : 4.872459
 }
+
+response = {'list': [['nom_station', id ]], 'station_around': True}
 
 pour connect studio 
 
@@ -37,7 +39,7 @@ r = requests.post('http://localhost:8000/MixTapeUser/set_station', json= {
  r = requests.post('http://localhost:8000/music/add_music_suggestion', json =
 {
 "mixtape_user_id" : 4,
-"artiste_id" : 1,
+"artiste_name" : "aa",
 "music_name" : "music1"
 }
 )

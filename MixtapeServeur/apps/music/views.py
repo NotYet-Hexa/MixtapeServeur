@@ -19,7 +19,7 @@ def view_add_music_suggestion(request):
         postjson = json.loads(request.body.decode("utf-8"))        
         try:
             mixtapeUser = MixtapeUser.objects.get(pk=postjson["mixtape_user_id"])
-            artiste = Artiste.objects.get(pk=postjson["artiste_id"])
+            artiste = Artiste.objects.get(nom=postjson["artiste_name"])
             add_music_suggestion(mixtapeUser.id, postjson["music_name"], artiste.id)
             response["com"] = "suggestion added with success" 
         except Exception:

@@ -68,6 +68,7 @@ def creat_mixtape_user(request):
                               mixtapeUser=mixtape_user)
                 taste.save()
                 response["reponse"] = "user creat with success"
+                response["user_id"] = mixtape_user.id
         except Exception:
             response["error"] = 404
 
@@ -105,10 +106,10 @@ def view_set_station(request):
      corectly created</h1>"""
     return HttpResponse(text)
 
-def test_test_gen_taste(request):
-    """ Exemple de page HTML, non valide pour que l'exemple soit concis """
-    # code pour tester créer 
-    station_taste(station_id=6)
-    text = """ <h1> Test </h1>"""
-    return HttpResponse(text)
+# def test_test_gen_taste(request):
+#     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
+#     # code pour tester créer 
+#     station_taste(station_id=6)
+#     text = """ <h1> Test </h1>"""
+#     return HttpResponse(text)
 
