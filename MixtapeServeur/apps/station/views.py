@@ -25,7 +25,7 @@ def view_next_song(request):
         try:
             print("station")
             station = Station.objects.get(mac_address=identif)
-            print("bientot next song")
+            print("bientot next song!!!!!")
             print(station.id)
             n_sg = next_song(station_id=station.id)
             print("recup next song ")

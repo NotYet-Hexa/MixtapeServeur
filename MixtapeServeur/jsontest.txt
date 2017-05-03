@@ -1,19 +1,19 @@
 pour créer un user
 
-r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_user', json={
-"user_name" : "zigmatoo2",
- "first_name" : "FN3",
-“last_name" : "LN3",
- "is_facebook_user" : "False",
- "fb_id" : "000",
-"profil_picture_url" : "url",
-"device" : "phone",
-"gender" : "gender",
-"token" : "token",
-"age" : 21,
+r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_use
+r', json={
+"Id" : "testNewJson",
+"first_name" : "TNJFN",
+"last_name" : "TNJLN",
+"IsFbUser" : "False",
+"ProfilPictureURL" : "url",
+"Devices" : "phone",
+"Gender" : "gender",
+"Token" : "token",
+"AgeRange" : 21,
 "pliked_genre_list" : ["g1", "g2", "g3", ],
 "punliked_genre_list" : ["g4", "g5"]
- })
+})
 
 
 pour avoir le voisinage
