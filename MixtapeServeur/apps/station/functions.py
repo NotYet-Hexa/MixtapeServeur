@@ -4,6 +4,7 @@ import random
 
 from .models import Station
 from MixtapeServeur.apps.mixtapeUser.models import MixtapeUser
+from MixtapeServeur.apps.mixtapeUser.functions import general_taste
 from MixtapeServeur.apps.music.models import Music
 
 
@@ -27,7 +28,9 @@ def station_taste(station_id):
     the_station = Station.objects.get(pk=station_id)
     station_taste_dic = {}
     for mixtape_user in MixtapeUser.objects.filter(station=the_station):
+        print(mixtape_user)
         general_taste_dic = general_taste(mixtape_user_id=mixtape_user.id)
+        print(general_taste_dic)
         for genre in general_taste_dic.keys():
             if genre in station_taste_dic.keys():
                 station_taste_dic[genre] += general_taste_dic[genre]
@@ -52,11 +55,11 @@ def next_song(station_id):
     docstring
     """
     mixtape_user_list = get_list_of_user(the_station_id=station_id)
+    print(mixtape_user_list)
     proposed_song = []
     no_proposed_music = 1
     genre_dic =  station_taste(station_id=station_id)
     print(genre_dic)
-    print("mixtape_users")
     for mixtape_user in mixtape_user_list:
         music = Music.objects.filter(mixtapeUser=mixtape_user)
         if music.count() == 1:
@@ -70,6 +73,7 @@ def next_song(station_id):
             else:
                 proposed_song.insert(1,music.nom)
     if no_proposed_music != 1:
+        print(proposed_song)
         print("proposed_song")
         print(proposed_song[random.randint(0, len(proposed_song)-1)])
         return proposed_song[random.randint(0, len(proposed_song)-1)]

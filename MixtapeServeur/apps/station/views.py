@@ -18,15 +18,18 @@ def view_next_song(request):
     
     response = {}
     if request.method == "POST" and len(request.body) > 0:
-
+        print("view next song")
         postjson = json.loads(request.body.decode("utf-8"))
         identif = postjson["raspberryId"]
         
         try:
+            print("station")
             station = Station.objects.get(mac_address=identif)
-            print
+            print("bientot next song")
+            print(station.id)
             n_sg = next_song(station_id=station.id)
-            response["response"] = n_sg  
+            print("recup next song ")
+            response["next_song"] = n_sg  
         except Exception:
             response["error"] = 404
 
