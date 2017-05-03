@@ -1,6 +1,6 @@
 pour créer un user
 
-json={
+r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_user', json={
 "user_name" : "zigmatoo2",
  "first_name" : "FN3",
 “last_name" : "LN3",
@@ -21,7 +21,7 @@ json={
 
 pour avoir le voisinage
 
-json = {
+r = requests.post('http://localhost:8000/station/neighbor_stations', json = {
 "latitude" = 45.781565,
 "longitude" = 4.872459
 }
@@ -33,3 +33,11 @@ r = requests.post('http://localhost:8000/MixTapeUser/set_station', json= {
  "station_id" : 1
  }
  )
+
+ r = requests.post('http://localhost:8000/music/add_music_suggestion', json =
+{
+"mixtape_user_id" : 4,
+"artiste_id" : 1,
+"music_name" : "music1"
+}
+)
