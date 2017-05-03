@@ -5,6 +5,8 @@ class Station(models.Model):
     latitude = models.IntegerField()
     longitude = models.IntegerField()
     
+    mac_address = models.CharField(max_length=17)
+    
     def __str__(self):
         """ 
         Cette méthode que nous définirons dans tous les modèles

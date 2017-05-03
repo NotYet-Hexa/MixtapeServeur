@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     
-    url(r'^next_song/(?P<station_id>\d+)/$', views.view_next_song),
+    url(r'^next_song$', views.view_next_song),
+    url(r'^exist$', views.exist),
 ]
