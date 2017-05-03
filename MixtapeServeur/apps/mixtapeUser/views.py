@@ -23,8 +23,6 @@ def creat_mixtape_user(request):
     pliked_artiste_list : list of string which containe the name of the liked artiste
     pliked_genre_list : list of string which containe the name of the liked genre
     punliked_genre_list : list of string which containe the name of the unliked genre
-    lat : int which contain the latitude of the user
-    longi : int which contain the longitude of the user
     """
     # pfirst_name, plast_name, page, pliked_artiste_list, pliked_genre_list,
     #  punliked_genre_list, lat, longi):
@@ -32,29 +30,20 @@ def creat_mixtape_user(request):
     if request.method == "POST" and len(request.body) > 0:
         
         postjson = json.loads(request.body.decode("utf-8"))
-        if MixtapeUser.objects.filter(username=postjson["user_name"]).count() > 0:
+        if MixtapeUser.objects.filter(username=postjson["Id"]).count() > 0:
             response["error"] = 50
             response["errcom"] = "username allready used"
             return JsonResponse(response)
 
 
-        mixtape_user = MixtapeUser(username=postjson["user_name"],
+        mixtape_user = MixtapeUser(username=postjson["Id"],
                                    first_name=postjson["first_name"],
                                    last_name=postjson["last_name"],
-                                   is_facebook_user=postjson["is_facebook_user"],
-                                   fb_id=postjson["fb_id"],
-                                   profil_picture_url=postjson["profil_picture_url"],device=postjson["device"],
-                                   gender=postjson["gender"], token=postjson["token"], age=postjson["age"],
-                                   latitude=postjson["latitude"], longitude=postjson["longitude"])
+                                   is_facebook_user=postjson["IsFbUser"],
+                                   profil_picture_url=postjson["ProfilPictureURL"],device=postjson["Devices"],
+                                   gender=postjson["Gender"], token=postjson["Token"], age=postjson["AgeRange"],)
         mixtape_user.save()
         try:
-            pliked_artiste_list = postjson["pliked_artiste_list"]
-            for liked_artiste in pliked_artiste_list:
-                artiste = Artiste.objects.get(nom=liked_artiste)
-                taste = Taste(points=100, artiste=artiste,
-                              mixtapeUser=mixtape_user)
-                taste.save()
-
             pliked_genre_list = postjson["pliked_genre_list"]
             for liked_genre in pliked_genre_list:
                 genre = Genre.objects.get(nom=liked_genre)

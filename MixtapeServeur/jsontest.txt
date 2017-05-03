@@ -11,9 +11,6 @@ r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_user', json={
 "gender" : "gender",
 "token" : "token",
 "age" : 21,
-"latitude" : 1.0,
-"longitude" : 1.0,
-"pliked_artiste_list" : [ "aa", "bb", "cc"],
 "pliked_genre_list" : ["g1", "g2", "g3", ],
 "punliked_genre_list" : ["g4", "g5"]
  })

@@ -18,12 +18,6 @@ def general_taste(mixtape_user_id):
                 general_taste_dic[taste.genre.nom] += 200
             else:
                 general_taste_dic[taste.genre.nom] = 200
-
-        if taste.points == 100: # it was a liked artiste
-            if taste.artiste.genre.nom in general_taste_dic:
-                general_taste_dic[taste.artiste.genre.nom] += 100
-            else:
-                general_taste_dic[taste.artiste.genre.nom] = 100
         if taste.points == -200: # it was a unliked genre
             if taste.genre.nom in general_taste_dic:
                 general_taste_dic[taste.genre.nom] += -200

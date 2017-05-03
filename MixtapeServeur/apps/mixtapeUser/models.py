@@ -11,15 +11,12 @@ import random
 
 class MixtapeUser(AbstractUser):
     is_facebook_user = models.BooleanField(max_length=100, default=False)
-    fb_id = models.CharField(max_length=100, null=True, blank=True)
     profil_picture_url = models.CharField(max_length=100, null=True, blank=True)
     device = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(max_length=100, null=True, blank=True)
     token = models.CharField(max_length=100, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     station = models.ForeignKey(Station, null=True, blank=True)
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
     
     def __str__(self):
         """ 

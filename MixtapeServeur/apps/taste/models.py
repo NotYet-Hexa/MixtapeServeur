@@ -5,8 +5,7 @@ from MixtapeServeur.apps.artiste.models import Artiste
 
 class Taste(models.Model):
     points = models.IntegerField()
-    genre = models.ForeignKey(Genre, null=True, blank=True)    
-    artiste = models.ForeignKey(Artiste, null=True, blank=True)
+    genre = models.ForeignKey(Genre, null=True, blank=True)
     mixtapeUser = models.ForeignKey("mixtapeUser.MixtapeUser", null=True, blank=True)
 
 
@@ -18,16 +17,7 @@ class Taste(models.Model):
         nous traiterons plus tard et dans l'administration
         """
 
-        # genre_name = self.genre.nom
-        # artiste_name  = self.artiste.nom
-        #  Genre.objects.get(pk=self.genre).nom
-        if self.artiste :
-            return str(self.mixtapeUser.id)+"A-"+self.artiste.nom+" : "+str(self.points)
-        else:
-            if self.genre :
-                return str(self.mixtapeUser.id)+"G-"+self.genre.nom+" : "+str(self.points)
-            else:
-                return "NULL"
+        return str(self.mixtapeUser.id)+"G-"+self.genre.nom+" : "+str(self.points)
 
 
 
