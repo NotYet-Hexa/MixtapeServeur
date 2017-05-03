@@ -1,4 +1,7 @@
 from django.db import models
+
+from django.contrib.auth.models import AbstractUser
+
 from MixtapeServeur.apps.station.models import Station
 from MixtapeServeur.apps.artiste.models import Artiste
 from MixtapeServeur.apps.taste.models import Taste
@@ -6,13 +9,13 @@ from MixtapeServeur.apps.genre.models import Genre
 import random
 
 
-class MixtapeUser(models.Model):
-    fname = models.CharField(max_length=100)
-    lname = models.CharField(max_length=100)
-    age = models.IntegerField()
-    station = models.ForeignKey(Station)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+class MixtapeUser(AbstractUser):
+    fname = models.CharField(max_length=100, null=True, blank=True)
+    lname = models.CharField(max_length=100, null=True, blank=True)
+    age = models.IntegerField(null=True, blank=True)
+    station = models.ForeignKey(Station, null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     
     def __str__(self):
         """ 
@@ -20,7 +23,7 @@ class MixtapeUser(models.Model):
         nous permettra de reconnaître facilement les différents objets que 
         nous traiterons plus tard et dans l'administration
         """
-        return self.fname+" "+self.lname 
+        return self.get_full_name()
 
 def creat_mixtape_user(pfname, plname, page, pliked_artiste_list, pliked_genre_list,
                        punliked_genre_list, lat, longi):
