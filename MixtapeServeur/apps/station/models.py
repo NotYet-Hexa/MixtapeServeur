@@ -2,8 +2,8 @@ from django.db import models
 
 class Station(models.Model):
     nom = models.CharField(max_length=100)
-    latitude = models.IntegerField()
-    longitude = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     
     def __str__(self):
         """ 

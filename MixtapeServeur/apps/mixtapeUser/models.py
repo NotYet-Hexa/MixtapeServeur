@@ -11,8 +11,8 @@ class MixtapeUser(models.Model):
     lname = models.CharField(max_length=100)
     age = models.IntegerField()
     station = models.ForeignKey(Station)
-    latitude = models.IntegerField()
-    longitude = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     
     def __str__(self):
         """ 
