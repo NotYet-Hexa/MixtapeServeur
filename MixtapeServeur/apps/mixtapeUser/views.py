@@ -12,7 +12,7 @@ from MixtapeServeur.apps.taste.models import Taste
 from MixtapeServeur.apps.genre.models import Genre
 
 from .models import MixtapeUser, set_station
-from .functions import test_dic_gen_taste, station_taste
+
 
 @csrf_exempt
 def creat_mixtape_user(request):
@@ -32,10 +32,11 @@ def creat_mixtape_user(request):
     if request.method == "POST" and len(request.body) > 0:
         
         postjson = json.loads(request.body.decode("utf-8"))
-        if MixtapeUser.objects.get(username=postjson["user_name"]):
+        if MixtapeUser.objects.filter(username=postjson["user_name"]).count() > 0:
             response["error"] = 50
             response["errcom"] = "username allready used"
             return JsonResponse(response)
+
 
         mixtape_user = MixtapeUser(username=postjson["user_name"],
                                    first_name=postjson["first_name"],
@@ -50,26 +51,27 @@ def creat_mixtape_user(request):
             pliked_artiste_list = postjson["pliked_artiste_list"]
             for liked_artiste in pliked_artiste_list:
                 artiste = Artiste.objects.get(nom=liked_artiste)
-                taste = Taste(points=100, genre=Genre.objects.get(nom="NULL"), artiste=artiste,
+                taste = Taste(points=100, artiste=artiste,
                               mixtapeUser=mixtape_user)
                 taste.save()
 
             pliked_genre_list = postjson["pliked_genre_list"]
             for liked_genre in pliked_genre_list:
                 genre = Genre.objects.get(nom=liked_genre)
-                taste = Taste(points=200, genre=genre, artiste=Artiste.objects.get(nom="NULL"),
+                taste = Taste(points=200, genre=genre,
                               mixtapeUser=mixtape_user)
                 taste.save()
             
             punliked_genre_list = postjson["punliked_genre_list"]
             for unliked_genre in punliked_genre_list:
                 genre = Genre.objects.get(nom=unliked_genre)
-                taste = Taste(points=-200, genre=genre, artiste=Artiste.objects.get(nom="NULL"),
+                taste = Taste(points=-200, genre=genre,
                               mixtapeUser=mixtape_user)
                 taste.save()
-                response["reponse"] = "user creat with success"
-                response["user_id"] = mixtape_user.id
+            response["reponse"] = "user creat with success"
+            response["user_id"] = mixtape_user.id
         except Exception:
+            print("prob")
             response["error"] = 404
 
     else :
@@ -106,10 +108,5 @@ def view_set_station(request):
      corectly created</h1>"""
     return HttpResponse(text)
 
-# def test_test_gen_taste(request):
-#     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
-#     # code pour tester créer 
-#     station_taste(station_id=6)
-#     text = """ <h1> Test </h1>"""
-#     return HttpResponse(text)
+
 

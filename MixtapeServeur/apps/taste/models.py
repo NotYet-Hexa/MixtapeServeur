@@ -18,14 +18,14 @@ class Taste(models.Model):
         nous traiterons plus tard et dans l'administration
         """
 
-        genre_name = self.genre.nom
-        artiste_name  = self.artiste.nom
+        # genre_name = self.genre.nom
+        # artiste_name  = self.artiste.nom
         #  Genre.objects.get(pk=self.genre).nom
-        if genre_name :
-            return "A-"+artiste_name+" : "+str(self.points)
+        if self.artiste :
+            return str(self.mixtapeUser.id)+"A-"+self.artiste.nom+" : "+str(self.points)
         else:
-            if artiste_name :
-                return "G-"+genre_name+" : "+str(self.points)
+            if self.genre :
+                return str(self.mixtapeUser.id)+"G-"+self.genre.nom+" : "+str(self.points)
             else:
                 return "NULL"
 

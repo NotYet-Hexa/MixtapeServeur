@@ -24,6 +24,7 @@ def view_next_song(request):
         
         try:
             station = Station.objects.get(mac_address=identif)
+            print
             n_sg = next_song(station_id=station.id)
             response["response"] = n_sg  
         except Exception:

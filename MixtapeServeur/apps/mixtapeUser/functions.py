@@ -44,29 +44,5 @@ def test_dic_gen_taste():
     mixtape_user_general_taste = general_taste(mixtape_user_id=9)
 
 
-def station_taste(station_id):
-    """
-    docstring
-    """
-    the_station = Station.objects.get(pk=station_id)
-    station_taste_dic = {}
-    for mixtape_user in MixtapeUser.objects.filter(station=the_station):
-        general_taste_dic = general_taste(mixtape_user_id=mixtape_user.id)
-        for genre in general_taste_dic.keys():
-            if genre in station_taste_dic.keys():
-                station_taste_dic[genre] += general_taste_dic[genre]
-            else:
-                station_taste_dic[genre] = general_taste_dic[genre]
-    prefered_genre_dic = {}
-    i = 5
-    while i > 0 :
-        value_max = 0
-        for genre, value in station_taste_dic.items():
-            if value > value_max:
-                genre_max = genre
-                value_max = value
-        prefered_genre_dic[genre_max] = (2*i)
-        del station_taste_dic[genre_max]
-        i-=1
-    return prefered_genre_dic
+
     
