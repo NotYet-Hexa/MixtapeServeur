@@ -29,6 +29,7 @@ def view_next_song(request):
             print(station.id)
             n_sg = next_song(station_id=station.id)
             print("recup next song ")
+            print(n_sg)
             response["next_song"] = n_sg  
         except Exception:
             response["error"] = 404

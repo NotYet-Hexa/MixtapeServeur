@@ -37,16 +37,17 @@ def station_taste(station_id):
             else:
                 station_taste_dic[genre] = general_taste_dic[genre]
     prefered_genre_dic = {}
-    i = 3
-    while i > 0 :
-        value_max = 0
-        for genre, value in station_taste_dic.items():
-            if value > value_max:
-                genre_max = genre
-                value_max = value
-        prefered_genre_dic[genre_max] = (2*i)
-        del station_taste_dic[genre_max]
-        i-=1
+    if bool(station_taste_dic):
+        i = 3
+        while i > 0 :
+            value_max = 0
+            for genre, value in station_taste_dic.items():
+                if value > value_max:
+                    genre_max = genre
+                    value_max = value
+            prefered_genre_dic[genre_max] = (2*i)
+            del station_taste_dic[genre_max]
+            i-=1
     return prefered_genre_dic
 
 
@@ -56,6 +57,7 @@ def next_song(station_id):
     """
     mixtape_user_list = get_list_of_user(the_station_id=station_id)
     print(mixtape_user_list)
+
     proposed_song = []
     no_proposed_music = 1
     genre_dic =  station_taste(station_id=station_id)

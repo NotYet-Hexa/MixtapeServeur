@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from MixtapeServeur.apps.station.models import Station
-from MixtapeServeur.apps.station.models import Station
 from MixtapeServeur.apps.artiste.models import Artiste
 from MixtapeServeur.apps.taste.models import Taste
 from MixtapeServeur.apps.genre.models import Genre
