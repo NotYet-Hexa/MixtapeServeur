@@ -25,3 +25,11 @@ json = {
 "latitude" = 45.781565,
 "longitude" = 4.872459
 }
+
+pour connect studio 
+
+r = requests.post('http://localhost:8000/MixTapeUser/set_station', json= {
+ "mixtape_user_id" : 4,
+ "station_id" : 1
+ }
+ )

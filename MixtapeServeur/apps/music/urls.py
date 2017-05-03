@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
+from . import views
 urlpatterns = [
-    
-    # url(r'^toto', lambda request: render_to_response("hello.html")),
+    url(r'^add_music_suggestion$', views.view_add_music_suggestion),
 ]

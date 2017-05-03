@@ -75,44 +75,32 @@ def creat_mixtape_user(request):
         return HttpResponseForbidden()
 
     return JsonResponse(response)
-   
-    
 
-    
-    
 
-# def test_creat_MTuser(request):
-#     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
-#     # code pour tester créer perso
-# {
-#    "is_facebook_user" : "False",
-#    "fb_id" : "000",
-#    "profil_picture_url" : "url",
-#    "device" : "phone",
-#    "gender" : "gender",
-#    "token" : "token",
-#    "age" : "age",
-#    "latitude" : 1.0,
-#    "longitude" : 1.0,
-#    "pliked_artiste_list" : [ "aa", "bb", "cc"],
-#    "pliked_genre_list" : ["g1", "g2", "g3", ],
-#    "pliked_genre_list" : ["g4", "g5"]
-# }
-#     creat_mixtape_user("FN2", "LN2", 21, ["aa", "bb", "cc"], ["g1", "g2", "g3"], ["g4", "g5"], 1, 1)
-#     text = """<h1>Test creat user have been executed, check out if the user had been
-#      corectly created</h1>"""
-#     return HttpResponse(text)
 
-def test_set_station(request):
+@csrf_exempt
+def view_set_station(request):
     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
     # code pour tester set station
-    mixtape_user = MixtapeUser(fname="FN_test_set_station2", lname="LN_test_set_station2",
-                               age=21, station=Station.objects.get(nom="NULL"), latitude=1,
-                               longitude=1)
-    mixtape_user.save()
-    station = Station(nom="test_set_station2", latitude=1, longitude=1)
-    station.save()
-    set_station(mixtape_user.id, station.id)
+    print("CC")
+    response = {}
+    if request.method == "POST" and len(request.body) > 0:
+        
+        postjson = json.loads(request.body.decode("utf-8"))
+        try:
+            mixtape_user = MixtapeUser.objects.get(pk=postjson["mixtape_user_id"])
+            station = Station.objects.get(pk=postjson["station_id"])
+            set_station(mixtape_user.id, station.id)
+            response["comment"]= "sation set with success"
+        except Exception:
+            response["error"] = 404
+            response["errcom"] = "station id or mixtape user id invalid"
+    else :
+        return HttpResponseForbidden()
+        
+    return JsonResponse(response)
+
+        
     text = """<h1>Test set station have been executed, check out if the user had been
      corectly created</h1>"""
     return HttpResponse(text)
