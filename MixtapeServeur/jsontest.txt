@@ -43,3 +43,14 @@ r = requests.post('http://localhost:8000/MixTapeUser/set_station', json= {
 "music_name" : "music1"
 }
 )
+
+next song
+
+r = requests.post('http://localhost:8000/station/next_song', json =
+     ...: {
+     ...: "raspberryId" : "EFFAE"
+     ...: }
+     ...: )
+
+     r.json()
+Out[163]: {'next_song': 'music1'}
