@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MixtapeServeur',
-    'MixtapeServeur.apps.user',
     'MixtapeServeur.apps.station',
     'MixtapeServeur.apps.genre',
     'MixtapeServeur.apps.artiste',
