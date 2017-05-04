@@ -18,12 +18,14 @@ from django.conf import settings
 from django.contrib import admin
 from django.shortcuts import render_to_response
 
+from . import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^music/', include('MixtapeServeur.apps.music.urls')),
     url(r'^station/', include('MixtapeServeur.apps.station.urls')),
     url(r'^MixTapeUser/', include('MixtapeServeur.apps.mixtapeUser.urls')),
-    url(r'^$', lambda request: render_to_response("hello.html")),
+    url(r'^$', views.monitor),
 
 ]
 

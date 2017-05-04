@@ -1,10 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>It works</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
+
 <body>
-    Hello world, welcome to my website
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center teal-text text-lighten-2">Acces Monitoring Devices</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">Bienvenue dans l'application de gestion des différentes raspberry</h5>
+                </div>
+                <div class="row center">
+                    <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Besoin d'aide ?</a>
+                </div>
+                <br><br>
+
+            </div>
+        </div>
+        <div class="parallax"><img src="http://materializecss.com/templates/parallax-template/background1.jpg" alt="Unsplashed background img 1" style="display: block; transform: translate3d(-50%, 239px, 0px);"></div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+            {% for station in stations %}
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+                        <h5 class="center">{{ station.nom }} </h5>
+                        <p class="light center">({{ station.longiture }}, {{ station.latitude }})</p>
+                        <p class="center">
+                            <a href="http://172.20.10.4/AdminControlRaspberry/sendplay?name={{ station.mac_address }}">Play</a>
+                            <a href="http://172.20.10.4/AdminControlRaspberry/sendpause?name={{ station.mac_address }}">Pause</a>
+                        </p>
+
+                    </div>
+                </div>
+            
+            {% endfor %}
+
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">La musique est beaucoup plus belle lorsqu'on l'a partage</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="http://materializecss.com/templates/parallax-template/background2.jpg" alt="Unsplashed background img 2" style="display: block; transform: translate3d(-50%, 43px, 0px);"></div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+
+            <div class="row">
+                <div class="col s12 center">
+                    <h3><i class="mdi-content-send brown-text"></i></h3>
+                    <h4>Contact Us</h4>
+                    <p class="left-align light">
+                        La team Mixtape est à votre disposition, pour tout renseignement n'hésitez pas à contacter Jacques il trouvera la réponse
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="parallax-container valign-wrapper">
+        <div class="parallax"><img src="http://materializecss.com/templates/parallax-template/background3.jpg" alt="Unsplashed background img 3" style="display: block;"></div>
+    </div>
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would
+                        help support and continue development on this project and is greatly appreciated.</p>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="brown-text text-lighten-3" href="#">MixtapeTeam</a>
+            </div>
+        </div>
+    </footer>
+    <div class="hiddendiv common"></div>
+    <div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+    </script>
 </body>
+
 </html>
