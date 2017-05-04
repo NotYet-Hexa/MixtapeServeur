@@ -50,7 +50,7 @@ def view_curent_song(request):
     
     response = {}
     if request.method == "POST" and len(request.body) > 0:
-        print("view next song")
+        print("view curent song")
         postjson = json.loads(request.body.decode("utf-8"))
         identif = postjson["raspberryId"]
         
