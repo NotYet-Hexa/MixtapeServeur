@@ -72,6 +72,7 @@ def next_song(station_id):
             no_proposed_music *=0
 
             music = music[0]
+            
             r = requests.get('https://api.spotify.com/v1/search?q='+music.artiste+'&type=artist')
             for elem in r.json()['artists']['items']:
                 for genre_name in elem['genres']:

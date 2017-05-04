@@ -28,7 +28,7 @@ def view_add_music_suggestion(request):
             print(music)
             music.save()
             
-            response["com"] = "suggestion added with success" 
+            response["com"] = "success" 
         except Exception as E:
             print(E)
             response["error"] = 404

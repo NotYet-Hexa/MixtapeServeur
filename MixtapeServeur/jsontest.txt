@@ -98,3 +98,9 @@ r = requests.post('http://localhost:8000/station/next_song', json =
 
      r.json()
 Out[163]: {'next_song': 'music1'}
+
+
+r = requests.post('http://172.20.10.12:80/station/curent_song', json ={
+    ...: "raspberryId" : "B8-27-EB-34-3D-FC"})
+
+    {'curent_song': 'spotify:track:7lQ8MOhq6IN2w8EYcFNSUk'}
