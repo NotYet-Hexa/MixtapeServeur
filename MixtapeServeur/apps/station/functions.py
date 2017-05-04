@@ -1,4 +1,5 @@
 from django.db import models
+import requests 
 
 import random
 
@@ -56,31 +57,47 @@ def next_song(station_id):
     docstring
     """
     mixtape_user_list = get_list_of_user(the_station_id=station_id)
+    print("mixtape_user_list :")
     print(mixtape_user_list)
 
     proposed_song = []
     no_proposed_music = 1
     genre_dic =  station_taste(station_id=station_id)
+    print("genre_dic : ")
     print(genre_dic)
     for mixtape_user in mixtape_user_list:
         music = Music.objects.filter(mixtapeUser=mixtape_user)
-        if music.count() == 1:
+        print(len(music) )
+        if len(music) == 1:
             no_proposed_music *=0
-            music = music.first()
+
+            music = music[0]
             r = requests.get('https://api.spotify.com/v1/search?q='+music.artiste+'&type=artist')
             for elem in r.json()['artists']['items']:
                 for genre_name in elem['genres']:
+                    print("GN : "+genre_name)
                     if genre_name in genre_dic.keys():
+                        print("if")
+                        print("if")
+                        print("if")
                         i = 0
-                        while i <=  genre_dic[music.artiste.genre.nom]:
+                        while i <=  genre_dic[genre_name]:
                             i +=1
-                            proposed_song.insert(1,music.nom)
-                    else:
-                        proposed_song.insert(1,music.nom)
+                            print(music.nom)
+                            proposed_song.insert(1,music)
+                    
+            print(music.nom)
+            print("insered")
+            proposed_song.insert(1,music)
+            print("fin")
+                    # print(proposed_song)
     if no_proposed_music != 1:
         print(proposed_song)
-        print("proposed_song")
-        print(proposed_song[random.randint(0, len(proposed_song)-1)])
+        
+        # for mixtape_user in mixtape_user_list:
+        #     music = Music.objects.filter(mixtapeUser=mixtape_user)
+        #     music.delete()
+        
         return proposed_song[random.randint(0, len(proposed_song)-1)]
     else:
         return "NULL"

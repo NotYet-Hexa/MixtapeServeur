@@ -1,20 +1,67 @@
+
+for genre_name in ["abstract","acid house","acoustic pop","adult standards","afrobeats","alternative dance","alternative metal","ambient","anthem worship","australian dance","azonto","azontobeats","bachata","bass music","bass trap","big beat","breakbeat","british folk","broadway","cabaret","canadian pop","ccm","chamber pop","chanson","children's music","chillwave","christian alternative rock","christian christmas","christian rock","christian uplift","classic funk rock","contemporary country","country","country christmas","country road","covertrance","crunk","dance pop","deep funk carioca","deep german hip hop","deep indie r&b","deep new americana","deep underground hip hop","detroit hip hop","detroit techno","dirty south rap","disco","dreamo","drill","drill and bass","drum and bass","dwn trap","electronic","epicore","escape room","fake","fingerstyle","folk","folk rock","folk-pop","francoton","freak folk","french pop","french rock","funk","funk rock","g funk","gangster rap","glitch","glitch hop","grunge pop","hardcore techno","hip hop","hollywood","indie anthem-folk","indie folk","indie pop","indie poptimism","indie psych-rock","indie r&b","indie rock","indiecoustica","indietronica","intelligent dance music","latin","latin pop","lift kit","lovers rock","makossa","melancholia","mellow gold","merengue urbano","microhouse","minimal techno","modern country rock","neo mellow","neo-psychedelic","new rave","ninja","noise pop","norwegian pop","nu metal","old school hip hop","permanent wave","pop","pop christmas","pop punk","pop rap","post teen pop","post-grunge","post-teen pop","quiet storm","r&b","rap","reggaeton","scorecore","shimmer pop","show tunes","singer-songwriter","slow core","soft rock","soul","soul christmas","soundtrack","southern hip hop","sunset lounge","synthpop","talent show","tech house","techno","traditional folk","trap music","trip hop","tropical","tropical house","underground hip hop","urban contemporary","video game music","violin","viral pop","west coast rap","world christmas","worship","ye ye"]:
+    genre = Genre(nom=genre_name)
+    genre.save()
+
+
 pour créer un user
 
-r = requests.post('http://localhost:8000/MixTapeUser/creat_mixtape_use
-r', json={
-"Id" : "testNewJson",
-"first_name" : "TNJFN",
-"last_name" : "TNJLN",
+r = requests.post('http://192.168.43.167:80/MixTapeUser/creat_mixtape_user', json={
+"Id" : "U1",
+"first_name" : "U1",
+"last_name" : "U1",
 "IsFbUser" : "False",
 "ProfilPictureURL" : "url",
 "Devices" : "phone",
 "Gender" : "gender",
 "Token" : "token",
 "AgeRange" : 21,
-"pliked_genre_list" : ["g1", "g2", "g3", ],
-"punliked_genre_list" : ["g4", "g5"]
+"FavoriteGenres" : ["french pop", "french rock", "cabaret", "chanson"],
+"DetestedGenres" : []
 })
 
+r = requests.post('http://192.168.43.167:80/MixTapeUser/creat_mixtape_user', json={
+"Id" : "U2",
+"first_name" : "U2",
+"last_name" : "U2",
+"IsFbUser" : "False",
+"ProfilPictureURL" : "url",
+"Devices" : "phone",
+"Gender" : "gender",
+"Token" : "token",
+"AgeRange" : 21,
+"FavoriteGenres" : ["folk rock", "french rock", "folk-pop", "chanson"],
+"DetestedGenres" : []
+})
+
+r = requests.post('http://192.168.43.167:80/MixTapeUser/creat_mixtape_user', json={
+"Id" : "U3",
+"first_name" : "U3",
+"last_name" : "U3",
+"IsFbUser" : "False",
+"ProfilPictureURL" : "url",
+"Devices" : "phone",
+"Gender" : "gender",
+"Token" : "token",
+"AgeRange" : 21,
+"FavoriteGenres" : ["rap", "pop rap", "hip hop"],
+"DetestedGenres" : []
+})
+
+
+r = requests.post('http://192.168.43.167:80/MixTapeUser/creat_mixtape_user', json={
+"Id" : "U0",
+"first_name" : "U0",
+"last_name" : "U0",
+"IsFbUser" : "False",
+"ProfilPictureURL" : "url",
+"Devices" : "phone",
+"Gender" : "gender",
+"Token" : "token",
+"AgeRange" : 21,
+"FavoriteGenres" : [],
+"DetestedGenres" : []
+})
 
 pour avoir le voisinage
 
@@ -23,7 +70,7 @@ r = requests.post('http://localhost:8000/station/neighbor_stations', json = {
 "longitude" : 4.872459
 }
 
-response = {'list': [['nom_station', id ]], 'station_around': True}
+response = {'list': [['nom_station', id ], [], ], 'station_around': True}
 
 pour connect studio 
 

@@ -4,6 +4,7 @@ class Station(models.Model):
     nom = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
+    curent_song = models.CharField(max_length=100, default = "NULL" )
     
     mac_address = models.CharField(max_length=17, null=True, blank=True)
     

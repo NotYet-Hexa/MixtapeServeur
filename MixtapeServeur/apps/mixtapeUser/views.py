@@ -30,6 +30,7 @@ def creat_mixtape_user(request):
     if request.method == "POST" and len(request.body) > 0:
         
         postjson = json.loads(request.body.decode("utf-8"))
+        print(postjson)
         if MixtapeUser.objects.filter(username=postjson["Id"]).count() > 0:
             response["error"] = 50
             response["errcom"] = "username allready used"
@@ -44,14 +45,14 @@ def creat_mixtape_user(request):
                                    gender=postjson["Gender"], token=postjson["Token"], age=postjson["AgeRange"],)
         mixtape_user.save()
         try:
-            pliked_genre_list = postjson["pliked_genre_list"]
+            pliked_genre_list = postjson["FavoriteGenres"]
             for liked_genre in pliked_genre_list:
                 genre = Genre.objects.get(nom=liked_genre)
                 taste = Taste(points=200, genre=genre,
                               mixtapeUser=mixtape_user)
                 taste.save()
             
-            punliked_genre_list = postjson["punliked_genre_list"]
+            punliked_genre_list = postjson["DetestedGenres"]
             for unliked_genre in punliked_genre_list:
                 genre = Genre.objects.get(nom=unliked_genre)
                 taste = Taste(points=-200, genre=genre,
@@ -80,7 +81,7 @@ def view_set_station(request):
         
         postjson = json.loads(request.body.decode("utf-8"))
         try:
-            mixtape_user = MixtapeUser.objects.get(pk=postjson["mixtape_user_id"])
+            mixtape_user = MixtapeUser.objects.get(username=postjson["mixtape_user_id"])
             station = Station.objects.get(pk=postjson["station_id"])
             set_station(mixtape_user.id, station.id)
             response["comment"]= "sation set with success"

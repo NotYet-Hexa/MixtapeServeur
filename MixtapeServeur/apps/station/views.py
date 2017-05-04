@@ -30,7 +30,33 @@ def view_next_song(request):
             n_sg = next_song(station_id=station.id)
             print("recup next song ")
             print(n_sg)
-            response["next_song"] = n_sg  
+            print(n_sg.music_uri)
+            station.curent_song = n_sg.music_uri
+            station.save()
+            response["next_song_name"] = n_sg.nom
+            response["next_song_uri"] = n_sg.music_uri  
+        except Exception:
+            response["error"] = 404
+
+    else :
+        return HttpResponseForbidden()
+
+    return JsonResponse(response)
+
+@csrf_exempt
+def view_curent_song(request):
+    """ Exemple de page HTML, non valide pour que l'exemple soit concis """
+    # code pour tester créer 
+    
+    response = {}
+    if request.method == "POST" and len(request.body) > 0:
+        print("view next song")
+        postjson = json.loads(request.body.decode("utf-8"))
+        identif = postjson["raspberryId"]
+        
+        try:
+            station = Station.objects.get(mac_address=identif)
+            response["curent_song"] = station.curent_song 
         except Exception:
             response["error"] = 404
 
@@ -73,7 +99,8 @@ def view_neighbor_stations(request):
             response["station_around"] = True 
             response["list"] = []
             for station in stations:
-                response["list"].insert(1, (station.nom , station.id))
+                response["list"].insert(1,{"station_name" : station.nom,
+                                           "station_id" : station.id})
         else :
             response["station_around"] = False
     else :

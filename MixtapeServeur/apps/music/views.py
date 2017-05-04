@@ -6,10 +6,11 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from MixtapeServeur.apps.mixtapeUser.models import MixtapeUser
 from MixtapeServeur.apps.artiste.models import Artiste
-from .models import add_music_suggestion
+from .models import Music
 
 @csrf_exempt
 def view_add_music_suggestion(request):
+    print("music sugg")
     """ Exemple de page HTML, non valide pour que l'exemple soit concis """
     # code pour tester créer 
     
@@ -18,11 +19,18 @@ def view_add_music_suggestion(request):
 
         postjson = json.loads(request.body.decode("utf-8"))        
         try:
-            mixtapeUser = MixtapeUser.objects.get(pk=postjson["mixtape_user_id"])
-            artiste = Artiste.objects.get(nom=postjson["artiste_name"])
-            add_music_suggestion(mixtapeUser.id, postjson["music_name"], artiste.id)
+            print("avant : ")
+            print(postjson["mixtape_user_id"])
+            mixtapeUser = MixtapeUser.objects.get(username=postjson["mixtape_user_id"])
+            print("apres : ")
+            music = Music(nom=postjson["music_name"], artiste= postjson["artiste_name"],
+                           mixtapeUser=mixtapeUser, music_uri = postjson["music_uri"])
+            print(music)
+            music.save()
+            
             response["com"] = "suggestion added with success" 
-        except Exception:
+        except Exception as E:
+            print(E)
             response["error"] = 404
     else :
         return HttpResponseForbidden()
